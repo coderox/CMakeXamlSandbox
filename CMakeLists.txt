@@ -91,20 +91,13 @@ set_property(SOURCE ${VERTEXSHADER_FILES} PROPERTY VS_SHADER_FLAGS "/DFLAGS_ADDE
 
 set_property(SOURCE "source/App.xaml" PROPERTY VS_XAML_TYPE "ApplicationDefinition") 
 
-set_source_files_properties(source/pch.cpp PROPERTIES COMPILE_FLAGS "/Ycpch.h")
-set_source_files_properties(source/App.xaml.cpp PROPERTIES COMPILE_FLAGS "/Yupch.h")
-set_source_files_properties(source/DirectXPage.xaml.cpp PROPERTIES COMPILE_FLAGS "/Yupch.h")
-set_source_files_properties(source/CMakeSandboxMain.cpp PROPERTIES COMPILE_FLAGS "/Yupch.h")
-set_source_files_properties(source/Common/DeviceResources.cpp PROPERTIES COMPILE_FLAGS "/Yupch.h")
-set_source_files_properties(source/Content/Sample3DSceneRenderer.cpp PROPERTIES COMPILE_FLAGS "/Yupch.h")
-set_source_files_properties(source/Content/SampleFpsTextRenderer.cpp PROPERTIES COMPILE_FLAGS "/Yupch.h")
-
 source_group("Common" FILES ${COMMON_FILES})
 source_group("Content" FILES ${CONTENT_FILES})
 source_group("Assets" FILES ${ASSET_FILES})
 
 add_executable(${EXE_NAME} WIN32 ${SOURCE_FILES} ${COMMON_FILES} ${CONTENT_FILES} ${ASSET_FILES})
 
+# This is the important line, making sure to point to the header file
 target_include_directories(${EXE_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/source)
 
 set_property(TARGET ${EXE_NAME} PROPERTY VS_WINRT_COMPONENT TRUE)
