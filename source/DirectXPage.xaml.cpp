@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "DirectXPage.xaml.h"
+#include "GLES2\gl2.h"
 
 using namespace CMakeSandbox;
 
@@ -82,6 +83,8 @@ DirectXPage::DirectXPage():
 
 	m_main = std::unique_ptr<CMakeSandboxMain>(new CMakeSandboxMain(m_deviceResources));
 	m_main->StartRenderLoop();
+
+	glClear(0);
 }
 
 DirectXPage::~DirectXPage()
