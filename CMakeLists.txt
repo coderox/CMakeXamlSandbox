@@ -38,10 +38,13 @@ set(SOURCE_FILES
     source/DirectXPage.xaml.h
     source/CMakeSandboxMain.cpp
     source/CMakeSandboxMain.h
+    source/OpenGLES.cpp
+    source/OpenGLES.h
+    source/OpenGLESPage.xaml
+    source/OpenGLESPage.xaml.cpp
+    source/OpenGLESPage.xaml.h
     source/pch.cpp
     source/pch.h
-    ${CMAKE_CURRENT_BINARY_DIR}/${APP_MANIFEST_NAME}
-    cmake/TemporaryKey.pfx
 )
 
 set(COMMON_FILES
@@ -49,6 +52,7 @@ set(COMMON_FILES
     source/Common/DeviceResources.h
     source/Common/DirectXHelper.h
     source/Common/StepTimer.h
+    source/Common/MathHelper.h
 )
 
 set(CONTENT_FILES
@@ -57,6 +61,8 @@ set(CONTENT_FILES
     source/Content/Sample3DSceneRenderer.h
     source/Content/SampleFpsTextRenderer.h
     source/Content/ShaderStructures.h
+    source/Content/SimpleRenderer.h
+    source/Content/SimpleRenderer.cpp
 )
 
 set(PIXELSHADER_FILES
@@ -109,6 +115,9 @@ add_executable(${EXE_NAME} WIN32 ${SOURCE_FILES} ${COMMON_FILES} ${CONTENT_FILES
 # This is the important line, making sure to point to the header file
 target_include_directories(${EXE_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/source)
 target_include_directories(${EXE_NAME} PRIVATE ${DEPENDENCIES_INCLUDE_DIRECTORIES})
+
+set_target_properties(${EXE_NAME} PROPERTIES COMPILE_FLAGS "/Yupch.h")
+set_source_files_properties(source/pch.cpp PROPERTIES COMPILE_FLAGS "/Ycpch.h")
 
 set_property(TARGET ${EXE_NAME} PROPERTY VS_WINRT_COMPONENT TRUE)
 

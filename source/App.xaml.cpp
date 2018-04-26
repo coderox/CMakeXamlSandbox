@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "DirectXPage.xaml.h"
+#include "OpenGLESPage.xaml.h"
 
 using namespace CMakeSandbox;
 
@@ -48,15 +49,15 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 	}
 #endif
 
-	if (m_directXPage == nullptr)
-	{
-		m_directXPage = ref new DirectXPage();
-	}
+	//if (m_directXPage == nullptr)
+	//{
+	//	m_directXPage = ref new DirectXPage();
+	//}
 
-	if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
-	{
-		m_directXPage->LoadInternalState(ApplicationData::Current->LocalSettings->Values);
-	}
+	//if (e->PreviousExecutionState == ApplicationExecutionState::Terminated)
+	//{
+	//	m_directXPage->LoadInternalState(ApplicationData::Current->LocalSettings->Values);
+	//}
 
 	auto rootFrame = dynamic_cast<Frame^>(Window::Current->Content);
 
@@ -66,31 +67,32 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 	{
 		// Create a Frame to act as the navigation context and associate it with
 		// a SuspensionManager key
-		rootFrame = ref new Frame();
+		//rootFrame = ref new Frame();
 
-		rootFrame->NavigationFailed += ref new Windows::UI::Xaml::Navigation::NavigationFailedEventHandler(this, &App::OnNavigationFailed);
+		//rootFrame->NavigationFailed += ref new Windows::UI::Xaml::Navigation::NavigationFailedEventHandler(this, &App::OnNavigationFailed);
 
-		if (rootFrame->Content == nullptr)
-		{
-			// When the navigation stack isn't restored navigate to the first page,
-			// configuring the new page by passing required information as a navigation
-			// parameter
-			rootFrame->Navigate(TypeName(DirectXPage::typeid), e->Arguments);
-		}
+		//if (rootFrame->Content == nullptr)
+		//{
+		//	// When the navigation stack isn't restored navigate to the first page,
+		//	// configuring the new page by passing required information as a navigation
+		//	// parameter
+		//	rootFrame->Navigate(TypeName(DirectXPage::typeid), e->Arguments);
+		//}
 		// Place the frame in the current Window
-		Window::Current->Content = rootFrame;
+		Window::Current->Content = ref new OpenGLESPage(&mOpenGLES);
 		// Ensure the current window is active
 		Window::Current->Activate();
 	}
 	else
 	{
-		if (rootFrame->Content == nullptr)
-		{
-			// When the navigation stack isn't restored navigate to the first page,
-			// configuring the new page by passing required information as a navigation
-			// parameter
-			rootFrame->Navigate(TypeName(DirectXPage::typeid), e->Arguments);
-		}
+		Window::Current->Content = ref new OpenGLESPage(&mOpenGLES);
+		//if (rootFrame->Content == nullptr)
+		//{
+		//	// When the navigation stack isn't restored navigate to the first page,
+		//	// configuring the new page by passing required information as a navigation
+		//	// parameter
+		//	rootFrame->Navigate(TypeName(DirectXPage::typeid), e->Arguments);
+		//}
 		// Ensure the current window is active
 		Window::Current->Activate();
 	}
@@ -108,7 +110,7 @@ void App::OnSuspending(Object^ sender, SuspendingEventArgs^ e)
 	(void) sender;	// Unused parameter
 	(void) e;	// Unused parameter
 
-	m_directXPage->SaveInternalState(ApplicationData::Current->LocalSettings->Values);
+	//m_directXPage->SaveInternalState(ApplicationData::Current->LocalSettings->Values);
 }
 
 /// <summary>
@@ -121,7 +123,7 @@ void App::OnResuming(Object ^sender, Object ^args)
 	(void) sender; // Unused parameter
 	(void) args; // Unused parameter
 
-	m_directXPage->LoadInternalState(ApplicationData::Current->LocalSettings->Values);
+	//m_directXPage->LoadInternalState(ApplicationData::Current->LocalSettings->Values);
 }
 
 /// <summary>

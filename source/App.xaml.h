@@ -7,6 +7,7 @@
 
 #include "App.g.h"
 #include "DirectXPage.xaml.h"
+#include "OpenGLES.h"
 
 namespace CMakeSandbox
 {
@@ -23,6 +24,7 @@ namespace CMakeSandbox
 		void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
 		void OnResuming(Platform::Object ^sender, Platform::Object ^args);
 		void OnNavigationFailed(Platform::Object ^sender, Windows::UI::Xaml::Navigation::NavigationFailedEventArgs ^e);
-		DirectXPage^ m_directXPage;
+		//DirectXPage^ m_directXPage;
+		OpenGLES mOpenGLES;
 	};
 }
