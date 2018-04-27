@@ -1,3 +1,0 @@
-[submodule ".\\dependencies\\angle"]
-	path = .\\dependencies\\angle
-	url = git@github.com:coderox/angle.git
