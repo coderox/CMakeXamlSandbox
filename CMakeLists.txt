@@ -20,7 +20,7 @@ set(SHORT_NAME ${EXE_NAME})
 set(PACKAGE_GUID "6515377e-dfd4-4cdb-80df-4e0326346efc")
 
 configure_file(
-    cmake/${APP_MANIFEST_NAME}
+    cmake/${APP_MANIFEST_NAME}.in
     ${CMAKE_CURRENT_BINARY_DIR}/${APP_MANIFEST_NAME}
     @ONLY
 )
@@ -82,6 +82,8 @@ set(ASSET_FILES ${ASSET_FILES}
     source/Assets/Square150x150Logo.scale-200.png
     source/Assets/StoreLogo.png
     source/Assets/Wide310x150Logo.scale-200.png
+    ${CMAKE_CURRENT_BINARY_DIR}/${APP_MANIFEST_NAME}
+    cmake/TemporaryKey.pfx
 )
 
 set_property(SOURCE ${CONTENT_FILES} PROPERTY VS_DEPLOYMENT_CONTENT 1)
@@ -105,6 +107,7 @@ set_property(SOURCE "source/App.xaml" PROPERTY VS_XAML_TYPE "ApplicationDefiniti
 source_group("Common" FILES ${COMMON_FILES})
 source_group("Content" FILES ${CONTENT_FILES})
 source_group("Assets" FILES ${ASSET_FILES})
+source_group("Resource Files" FILES ${RESOURCE_FILES})
 
 add_executable(${EXE_NAME} WIN32 ${SOURCE_FILES} ${COMMON_FILES} ${CONTENT_FILES} ${ASSET_FILES})
 
