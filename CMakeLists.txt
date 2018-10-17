@@ -7,15 +7,11 @@ elseif(MSVC_VERSION GREATER 1600)
   set(COMPILER_VERSION "11")
 endif()
 
-#Enable folders grouping in IDE
+# Enable folders grouping in IDE
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-#Add dependencies for client project
-set(DEPENDENCIES_INCLUDE_DIRECTORIES "")
-set(DEPENDENCIES_INCLUDE_RUNTIMES "")
+# Add dependencies for client project
 add_subdirectory(dependencies)
-
-message(STATUS "${DEPENDENCIES_INCLUDE_DIRECTORIES}")
 
 set (APP_MANIFEST_NAME Package.appxmanifest)
 
@@ -114,12 +110,12 @@ add_executable(${EXE_NAME} WIN32 ${SOURCE_FILES} ${COMMON_FILES} ${CONTENT_FILES
 
 # This is the important line, making sure to point to the header file
 target_include_directories(${EXE_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/source)
-target_include_directories(${EXE_NAME} PRIVATE ${DEPENDENCIES_INCLUDE_DIRECTORIES})
 
 set_target_properties(${EXE_NAME} PROPERTIES COMPILE_FLAGS "/Yupch.h")
 set_source_files_properties(source/pch.cpp PROPERTIES COMPILE_FLAGS "/Ycpch.h")
 
 set_property(TARGET ${EXE_NAME} PROPERTY VS_WINRT_COMPONENT TRUE)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${EXE_NAME})
 
 target_link_libraries(${EXE_NAME} d3d11)
 target_link_libraries(${EXE_NAME} libGLESv2 libEGL)
