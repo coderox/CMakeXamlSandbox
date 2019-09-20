@@ -104,3 +104,17 @@ set_property(TARGET ${EXE_NAME} PROPERTY VS_WINRT_COMPONENT TRUE)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${EXE_NAME})
 
 target_link_libraries(${EXE_NAME} d3d11)
+
+
+FILE(TO_NATIVE_PATH "C:/Program Files (x86)/Windows Kits/10/bin/10.0.18362.0/x86/signtool.exe" SIGNTOOL_COMMAND)
+
+add_custom_command(TARGET ${EXE_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E
+                            copy_if_different ../cmake/CoderoxTestCertificate.cer ./AppPackages/CMakeSandbox/CMakeSandbox_1.0.0.0_x64_Debug_Test/
+                   COMMAND ${SIGNTOOL_COMMAND} sign 
+                            /fd sha256 /a
+                            /f ../cmake/CoderoxTestCertificate.pfx
+                            /p P@ssw0rd
+                            "$<$<CONFIG:Debug>:${ALL_OUTPUT_3RD_PARTY_DLLS_DEBUG}>"
+                            ./AppPackages/CMakeSandbox/CMakeSandbox_1.0.0.0_x64_Debug_Test/CMakeSandbox_1.0.0.0_x64_Debug.msix
+)
