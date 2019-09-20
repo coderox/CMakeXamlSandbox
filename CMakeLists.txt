@@ -32,7 +32,7 @@ set(SOURCE_FILES
     source/pch.cpp
     source/pch.h
     ${CMAKE_CURRENT_BINARY_DIR}/${APP_MANIFEST_NAME}
-    cmake/TemporaryKey.pfx
+    cmake/CoderoxTestCertificate.pfx
 )
 
 set(COMMON_FILES
