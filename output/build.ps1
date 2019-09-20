@@ -1,2 +1,0 @@
-#cmake --build . -- /p:PackageCertificateThumbprint="" /p:PackageCertificateKeyFile="c:\repos\coderox\CMakeXamlSandbox\cmake\CoderoxTestCertificate.pfx" /p:PackageCertificatePassword=P@ssw0rd
-cmake --build . -- /p:AppxPackageSigningEnabled=false
