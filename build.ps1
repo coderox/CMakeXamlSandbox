@@ -1,0 +1,1 @@
+& cmake -E chdir ./output/ cmake --build . -- /p:UapAppxPackageBuildMode=StoreUpload /p:PackageCertificateThumbprint=02D41BB52BB3866AC5358EB94F52D123FDF53475 /p:PackageCertificateKeyFile=../CoderoxTestCertificate.pfx /p:PackageCertificatePassword=P@ssw0rd
