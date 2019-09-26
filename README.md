@@ -1,7 +1,13 @@
-Clone the repo, change directory to the output directory and run the generate.ps1 file to generate the solution.
+Clone the repo...
 
-Or while in the output/ dir run the following command:
+Open a powershell prompt and browse to the repository root directory.
 
-```
-cmake -DCMAKE_SYSTEM_NAME="WindowsStore" -DCMAKE_SYSTEM_VERSION="10.0" ..
-```
+Run:
+
+.\cmake\CreateSelfSignedCert.ps1
+
+This will generate the certificate required for signing, copy the outputted thumbprint value into the build.py script in the appropriate parameter field, then run:
+
+python build.py
+
+If everything works, you should have a installable
