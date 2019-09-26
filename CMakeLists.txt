@@ -103,24 +103,3 @@ set_property(TARGET ${EXE_NAME} PROPERTY VS_WINRT_COMPONENT TRUE)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${EXE_NAME})
 
 target_link_libraries(${EXE_NAME} d3d11)
-
-# Custom step required when creating certificate and self signing
-# Still not sure how to handle APPXUPLOAD
-# Ugly paths and explicit file names here
-#####################################
-# FILE(TO_NATIVE_PATH "C:/Program Files (x86)/Windows Kits/10/bin/10.0.18362.0/x86/signtool.exe" SIGNTOOL_COMMAND)
-# SET(SELF_SIGNED_CERTIFICATE_CER "../CoderoxTestCertificate.cer")
-# SET(SELF_SIGNED_CERTIFICATE_PFX "../CoderoxTestCertificate.pfx") 
-# SET(SELF_SIGNED_CERTIFICATE_PASSWORD "P@ssw0rd")
-# SET(APPX_PACKAGE_DIR "./AppPackages/CMakeSandbox/CMakeSandbox_1.0.0.0_x64_Debug_Test/")
-# SET(APPX_PACKAGE_NAME "${APPX_PACKAGE_DIR}CMakeSandbox_1.0.0.0_x64_Debug.msix")
-
-# add_custom_command(TARGET ${EXE_NAME} PRE_BUILD
-#                  COMMAND ${CMAKE_COMMAND} -E
-#                            copy_if_different ${SELF_SIGNED_CERTIFICATE_CER} ${APPX_PACKAGE_DIR}
-#                   COMMAND ${SIGNTOOL_COMMAND} sign 
-#                            /fd sha256 /a
-#                            /f ${SELF_SIGNED_CERTIFICATE_PFX}
-#                            /p ${SELF_SIGNED_CERTIFICATE_PASSWORD}
-#                            ${APPX_PACKAGE_NAME}
-# )
